@@ -1,5 +1,6 @@
 # Experiment 3: DML Commands
-
+## Name: Aaron Mariyan A
+## Reg.no: 212224040004
 ## AIM
 To study and implement DML (Data Manipulation Language) commands.
 
@@ -9,282 +10,157 @@ To study and implement DML (Data Manipulation Language) commands.
 Used to add records into a relation.
 These are three type of INSERT INTO queries which are as
 A)Inserting a single record
-**Syntax (Single Row):**
-```sql
+*Syntax (Single Row):*
+```
 INSERT INTO table_name (field_1, field_2, ...) VALUES (value_1, value_2, ...);
 ```
-**Syntax (Multiple Rows):**
-```sql
+*Syntax (Multiple Rows):*
+```
 INSERT INTO table_name (field_1, field_2, ...) VALUES
 (value_1, value_2, ...),
 (value_3, value_4, ...);
 ```
-**Syntax (Insert from another table):**
-```sql
+*Syntax (Insert from another table):*
+```
 INSERT INTO table_name SELECT * FROM other_table WHERE condition;
 ```
 ### 2. UPDATE
 Used to modify records in a relation.
 Syntax:
-```sql
+```
 UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;
 ```
 ### 3. DELETE
 Used to delete records from a relation.
-**Syntax (All rows):**
-```sql
+*Syntax (All rows):*
+```
 DELETE FROM table_name;
 ```
-**Syntax (Specific condition):**
-```sql
+*Syntax (Specific condition):*
+```
 DELETE FROM table_name WHERE condition;
 ```
 ### 4. SELECT
 Used to retrieve records from a table.
-**Syntax:**
-```sql
+*Syntax:*
+```
 SELECT column1, column2 FROM table_name WHERE condition;
 ```
-**Question 1**
---
-For products with a profit % less than 30% of selling price, update the selling price to provide a profit margin of 35% over cost price of the product in the products table.
+### *Question 1*
 
-PRODUCTS TABLE
-
-name               type
------------------  ---------------
-product_id         INT
-product_name       VARCHAR(100)
-category           VARCHAR(50)
-cost_price         DECIMAL(10,2)
-sell_price         DECIMAL(10,2)
-reorder_lvl        INT
-quantity           INT
-supplier_id        INT
-
-```sql
-update products
-set sell_price= cast(cost_price*1.35 as integer)
-where (sell_price-cost_price)/sell_price <0.3;
+Write a SQL statement to update the product_name as 'Grapefruit' whose product_id is 4 in the products table.
 ```
+update products
+set product_name='Grapefruit'
+where product_id=4;
+```
+### *Output:*
 
-**Output:**
+![image](https://github.com/user-attachments/assets/f7cb35b7-e15c-4d6d-be26-695316a2752f)
 
-<img width="1230" height="564" alt="image" src="https://github.com/user-attachments/assets/31226bf5-d8d1-4ca5-8809-48a0d6d5f097" />
+### *Question 2*
 
+Write a SQL query to reduce the reorder level by 30% where cost price is more than 50 and quantity in stock is less than 100 in the products table.
+```
+update Products
+set reorder_lvl=reorder_lvl*0.7
+where cost_price>50 and quantity<100;
+```
+### *Output:*
 
-**Question 2**
----
+![image](https://github.com/user-attachments/assets/be6557eb-cca2-408a-ba08-390d6e796285)
+
+### *Question 3*
+
+Write a SQL query to Delete a Specific Surgery which was made on 28th Feb 2024.
+```
+delete from Surgeries 
+where surgery_date='2024-02-28';
+```
+### *Output:*
+
+![image](https://github.com/user-attachments/assets/10904988-223a-42e7-94ca-3b48b01b9c31)
+
+### *Question 4*
+
+Write a SQL query to Delete customers from 'customer' table where 'GRADE' is not equal to 3.
+```
+delete from customer
+where GRADE!=3;
+```
+### *Output:*
+
+![image](https://github.com/user-attachments/assets/79285c8a-2978-407d-82ba-b3c2cdb69272)
+
+### *Question 5*
+
+Write a query to fetch details of employees whose EmpLname ends with an alphabet ‘A’ and contains five alphabets.
+```
+select * from EmployeeInfo 
+where EmpLname like '%A' and length(EmpLname)=5;
+```
+### *Output:*
+
+![image](https://github.com/user-attachments/assets/821d1823-0fea-438e-9709-d82220eea49a)
+
+### *Question 6*
+
+Write a SQL query to classify base in the Calculations table as 'Provided' if it is not NULL, otherwise 'Not Provided'.
+```
+select id,base,
+case when base is not NULL then 'Provided'
+else 'Not Provided'
+end as base_status
+from Calculations;
+```
+### *Output:*
+
+![image](https://github.com/user-attachments/assets/01350e6d-b955-4d9f-8d27-c40f32b3423e)
+
+### *Question 7*
+
+Write a SQL query to calculate the final price after applying both the discount and the tax. Return product_id, original_price, discount_percentage, tax_rate, and final_price.
+```
+select product_id,original_price,discount_percentage,tax_rate,(original_price*(1-discount_percentage))*(1+tax_rate) as final_price
+from products;
+```
+### *Output:*
+
+![image](https://github.com/user-attachments/assets/1fb06574-24fd-4972-b6e2-79a5a2065676)
+
+### *Question 8*
+
+Create a report that shows the capitalized FirstName and capitalized LastName renamed as FirstName and Lastname respectively and EmployeeId from the employees table sorted by EmployeeId in descending order.
+```
+select upper(FirstName) AS FirstName,upper(LastName) AS LastName,EmployeeId
+from employees
+order by EmployeeID desc;
+```
+### *Output:*
+
+![image](https://github.com/user-attachments/assets/fdff8b34-9326-409f-9a0f-184c53772e6c)
+
+### *Question 9*
+
+Write a SQL statement to retrieve city(column name) of all customers from customers table without any repeats.
+```
+select distinct city from customers;
+```
+### *Output:*
+
+![image](https://github.com/user-attachments/assets/38dc88ff-bf42-4f73-a8ca-5a1b75ae5a23)
+
+### *Question 10*
+
 Write a SQL statement to Double the salary for employees in department 20 who have a job_id ending with 'MAN'
-
-Employees table
-
----------------
-employee_id
-first_name
-last_name
-email
-phone_number
-hire_date
-job_id
-salary
-commission_pct
-manager_id
-department_id
-
-```sql
-update employees 
-set salary = salary*2 where job_id like '%MAN%';
 ```
-
-**Output:**
-
-<img width="1230" height="445" alt="image" src="https://github.com/user-attachments/assets/4a3ebfeb-32bb-428a-afdd-35b4821f9294" />
-
-
-**Question 3**
----
-Write a SQL statement to Change the category to 'Household' where product name contains 'Detergent' in the products table.
-
-Products Table 
-
-name          type       
-----------    ---------- 
-product_id     INT PRIMARY KEY        
-product_name   VARCHAR(10) 
-category       VARCHAR(50) 
-cost_price     DECIMAL(10) 
-sell_price     DECIMAL(10) 
-reorder_lvl    INT        
-quantity       INT        
-supplier_id    INT   
-
-```sql
-update products
-set category='Household' where product_name like '%Detergent%';
+update EMPLOYEES
+SET SALARY= SALARY *2
+WHERE JOB_ID like'%MAN';
 ```
+### *Output:*
 
-**Output:**
-
-<img width="1220" height="602" alt="image" src="https://github.com/user-attachments/assets/67d8e125-5c5e-4fb7-a279-1b93e5a84c5f" />
-
-
-**Question 4**
----
-Increase the reorder level by 30% for products from 'Food' category having quantity in stock less than 50% of existing reorder level in the products table
-name               type
---------------  ----------
-product_id         INT
-product_name       VARCHAR(10)
-category           VARCHAR(50)
-cost_price         DECIMAL(10)
-sell_price         DECIMAL(10)
-reorder_lvl        INT
-quantity              INT
-supplier_id           INT
-```sql
-update products
-set reorder_lvl= reorder_lvl *1.30 where category='Food' and reorder_lvl > quantity*0.5;
-```
-
-**Output:**
-
-<img width="1230" height="503" alt="image" src="https://github.com/user-attachments/assets/80d024a9-9653-4628-aee0-c9ba2eee2da5" />
-
-
-**Question 5**
----
-Write a SQL statement to Increase quantity of all products by 10% to adjust for surplus stock counted
-
-Products table
-
----------------
-product_id
-product_name
-category
-cost_price
-sell_price
-reorder_lvl
-quantity
-supplier_id
-
-```sql
-update products
-set   quantity=quantity*1.1
-```
-
-**Output:**
-
-<img width="1227" height="711" alt="image" src="https://github.com/user-attachments/assets/8ec35df1-bf73-4bb3-ab67-7c31ef2f3825" />
-
-
-**Question 6**
----
-Write a SQL query to Delete customers with 'GRADE' 3 or 'AGENT_CODE' 'A008' whose 'OUTSTANDING_AMT' is less than 5000
-
-Sample table: Customer
-
-+-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+  
-|CUST_CODE  | CUST_NAME   | CUST_CITY   | WORKING_AREA | CUST_COUNTRY | GRADE | OPENING_AMT | RECEIVE_AMT | PAYMENT_AMT |OUTSTANDING_AMT| PHONE_NO     | AGENT_CODE |
-+-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+
-| C00013    | Holmes      | London      | London       | UK           |     2 |     6000.00 |     5000.00 |     7000.00 |       4000.00 | BBBBBBB      | A003       |
-| C00001    | Micheal     | New York    | New York     | USA          |     2 |     3000.00 |     5000.00 |     2000.00 |       6000.00 | CCCCCCC      | A008       |
-| C00020    | Albert      | New York    | New York     | USA          |     3 |     5000.00 |     7000.00 |     6000.00 |       6000.00 | BBBBSB
-
-```sql
-delete from customer where (grade=3 or agent_code='A008') and OUTSTANDING_AMT<5000;
-```
-
-**Output:**
-
-<img width="1226" height="486" alt="image" src="https://github.com/user-attachments/assets/d1c9cf0b-e909-4ff9-8571-d4ddc92c6f76" />
-
-
-**Question 7**
----
-Write a SQL query to Delete a Specific Surgery whose ID is 3 or surgeon ID is 4.
-
-Sample table: Surgeries
-
-
-```sql
-delete from Surgeries where surgery_id=3 or surgeon_id=4;
-```
-
-**Output:**
-
-<img width="1237" height="966" alt="image" src="https://github.com/user-attachments/assets/d3b45f6f-71f9-4630-9724-e0976496d6a4" />
-
-
-**Question 8**
----
-Write a SQL query to Delete customers from 'customer' table where 'CUST_NAME' has exactly 6 characters.
-
-Sample table: Customer
-
-+-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+  
-|CUST_CODE  | CUST_NAME   | CUST_CITY   | WORKING_AREA | CUST_COUNTRY | GRADE | OPENING_AMT | RECEIVE_AMT | PAYMENT_AMT |OUTSTANDING_AMT| PHONE_NO     | AGENT_CODE |
-+-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+
-| C00013    | Holmes      | London      | London       | UK           |     2 |     6000.00 |     5000.00 |     7000.00 |       4000.00 | BBBBBBB      | A003       |
-| C00001    | Micheal     | New York    | New York     | USA          |     2 |     3000.00 |     5000.00 |     2000.00 |       6000.00 | CCCCCCC      | A008       |
-| C00020    | Albert      | New York    | New York     | USA          |     3 |     5000.00 |     7000.00 |     6000.00 |       6000.
-
-```sql
-delete from customer where length(cust_name)=6;
-```
-
-**Output:**
-
-<img width="1226" height="827" alt="image" src="https://github.com/user-attachments/assets/5db741d0-d6ac-46ff-afec-a2a11c9e3755" />
-
-
-**Question 9**
----
-Write a SQL query to Delete customers from 'customer' table where 'CUST_NAME' contains the substring 'Holmes'.
-
-Sample table: Customer
-
-+-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+  
-|CUST_CODE  | CUST_NAME   | CUST_CITY   | WORKING_AREA | CUST_COUNTRY | GRADE | OPENING_AMT | RECEIVE_AMT | PAYMENT_AMT |OUTSTANDING_AMT| PHONE_NO     | AGENT_CODE |
-+-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+
-| C00013    | Holmes      | London      | London       | UK           |     2 |     6000.00 |     5000.00 |     7000.00 |       4000.00 | BBBBBBB      | A003       |
-| C00001    | Micheal     | New York    | New York     | USA          |     2 |     3000.00 |     5000.00 |     2000.00 |       6000.00 | CCCCCCC      | A008       |
-| C00020    | Albert      | New York    | New York     | USA          |     3 |     5000.00 |     7000.00 |     6000.00 |       6000.00 | BBBBSB
-
-```sql
-delete from customer where cust_name like '%Holmes%';
-```
-
-**Output:**
-
-<img width="1244" height="601" alt="image" src="https://github.com/user-attachments/assets/ee98dec2-fb3a-42a4-8edf-7e1131355468" />
-
-
-**Question 10**
----
-Write a SQL query to remove rows from the table 'customer' with the following condition -
-
-1. 'cust_country' must be 'India',
-
-2. 'cus_city' must not be 'Chennai',
-
-Sample table: Customer
-
-+-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+  
-|CUST_CODE  | CUST_NAME   | CUST_CITY   | WORKING_AREA | CUST_COUNTRY | GRADE | OPENING_AMT | RECEIVE_AMT | PAYMENT_AMT |OUTSTANDING_AMT| PHONE_NO     | AGENT_CODE |
-+-----------+-------------+-------------+--------------+--------------+-------+-------------+-------------+-------------+---------------+--------------+------------+
-| C00013    | Holmes      | London      | London       | UK           |     2 |     6000.00 |     5000.00 |     7000.00 |       4000.00 | BBBBBBB      | A003       |
-| C00001    | Micheal     | New York    | New York     | USA          |     2 |     3000.00 |     5000.00 |     2000.00 |       6000.00 | CCCCCCC      | A008       |
-| C00020    | Albert      | New York    | New York     | USA          |     3 |     5000.00 |     7000.00 |     6000.00 |       6000.00 | BBBBSB
-
-```sql
-delete from customer where cust_country='India' and cust_city!='Chennai';
-```
-
-**Output:**
-
-<img width="1229" height="963" alt="image" src="https://github.com/user-attachments/assets/6f3a088d-f964-46f2-810b-25b8d24d2b1a" />
-
+![image](https://github.com/user-attachments/assets/30c35d8d-ef7b-4012-8554-9d1fe551bc5b)
 
 ## RESULT
 Thus, the SQL queries to implement DML commands have been executed successfully.
