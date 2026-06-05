@@ -104,224 +104,187 @@ CREATE TABLE Table_Name (
 ```
 
 **Question 1**
---
--- Write an SQL command can to add a column named email of type TEXT to the customers table
+
+![image](https://github.com/user-attachments/assets/219bf5e2-9208-4c6f-8229-e1a9c0b2d545)
 
 ```sql
-ALTER table Customers 
-ADD COLUMN email TEXT;
+CREATE TABLE Orders(
+ OrderID INTEGER PRIMARY KEY,
+ OrderDate DATE NOT NULL,
+ CustomerID INTEGER,
+ FOREIGN KEY(CustomerID) REFERENCES CustomerS(CustomerID)
+ );
 ```
 
 **Output:**
 
-<img width="870" height="373" alt="image" src="https://github.com/user-attachments/assets/aab95464-f064-4f2b-93ce-55e86e013ad1" />
-
+![image](https://github.com/user-attachments/assets/6709e358-ded9-4297-b80c-2dd36c2d62dc)
 
 **Question 2**
----
- Write a SQL Query for inserting the below values in the table Customers
 
-ID               NAME             AGE  ADDRESS     SALARY      
----------------  ---------------  ---  ----------  ----------  
-1                Ramesh           32   Ahmedabad   2000
-2                Khilan           25   Delhi       1500
-3                Kaushik          23   Kota        2000
+![image](https://github.com/user-attachments/assets/dcc48243-a82c-41c8-9b34-b26f240bf572)
 
-```
-insert into  Customers(ID,NAME,AGE,ADDRESS,SALARY) VALUES (1,"Ramesh",32,"Ahmedabad",2000),
-(2,"Khilan",25,"Delhi",1500),(3,"Kaushik",23,"Kota",2000)
-```
-
-**Output:**
-
-<img width="863" height="378" alt="image" src="https://github.com/user-attachments/assets/3d32bd53-c72b-4833-97c3-4239e4f67efd" />
-
-
-**Question 3**
----
-Create a table named ProjectAssignments with the following constraints:
-AssignmentID as INTEGER should be the primary key.
-EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
-ProjectID as INTEGER should be a foreign key referencing Projects(ProjectID).
-AssignmentDate as DATE should be NOT NULL.
 
 ```sql
-CREATE TABLE ProjectAssignments(
-    AssignmentID INTEGER PRIMARY KEY,
-    EmployeeID INTEGER,
-    ProjectID  INTEGER,
-    AssignmentDate DATE NoT NULL,
-    
-    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
-    FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID)
-);
+CREATE TABLE item(
+ item_id TEXT PRIMARY KEY,
+ item_desc TEXT NOT NULL,
+ rate INTEGER NOT NULL,
+ icom_id TEXT CHECK (length(icom_id = 4)),
+ FOREIGN KEY (icom_id) REFERENCES company(com_id)
+ ON UPDATE CASCADE
+ ON DELETE CASCADE
+ );
 ```
 
 **Output:**
 
-<img width="858" height="364" alt="image" src="https://github.com/user-attachments/assets/dedc7761-dd90-45b0-94d9-db39aae25b2b" />
+![image](https://github.com/user-attachments/assets/a2122bb7-2821-40b5-bba7-3a4f365aada3)
+
+**Question 3**
+
+![image](https://github.com/user-attachments/assets/17220573-306d-44a6-bab5-f2a1b50c420f)
+
+
+```sql
+INSERT INTO Customers (CustomerID, Name,Address,City,ZipCode)
+VALUES (302, 'Laura Croft', '456 Elm St','Seattle', 98101);
+
+INSERT INTO Customers (CustomerID, Name,Address,City,ZipCode)
+VALUES (303, 'Bruce Wayne', '789 Oak St ','Gotham ', 10001);
+
+```
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/c9f8889e-0893-46ef-95e8-50fa91250ed6)
 
 
 **Question 4**
----
-Write a SQL query to Add a new column Mobilenumber as number in the Student_details table.
 
-Sample table: Student_details
+![image](https://github.com/user-attachments/assets/f23ccb5d-4675-4b45-a582-732fe6cfc116)
 
- cid              name             type             notnu  dflt_value  pk
----------------  ---------------  ---------------  -----  ----------  ----------
-0                RollNo           int              0                  1
-1                Name             VARCHAR(100)     1                  0
-2                Gender           TEXT             1                  0
-3                Subject          VARCHAR(30)      0                  0
-4                MARKS            INT (3)          0                  0
 
 ```sql
-ALTER table  Student_details  
-ADD COLUMN Mobilenumber number;
+CREATE TABLE  Reviews(
+    ReviewID  INTEGER,
+    ProductID  INTEGER,
+    Rating REAL,
+    ReviewText TEXT
+);
 ```
 
 **Output:**
+![image](https://github.com/user-attachments/assets/7365cb07-a963-4b90-bd7e-5e7cea3cdec9)
 
-<img width="1197" height="413" alt="image" src="https://github.com/user-attachments/assets/eb91d111-8db8-43f8-8415-fd46b5cbd2cc" />
 
 
 **Question 5**
----
-Create a table named Employees with the following columns:
+![image](https://github.com/user-attachments/assets/e3b31a9f-99c4-469f-8c95-cc4b85ce6ae4)
 
-EmployeeID as INTEGER
-FirstName as TEXT
-LastName as TEXT
-HireDate as DATE
 
 ```sql
-create table  Employees(
-     EmployeeID INTEGER,
-     FirstName TEXT,
-     LastName TEXT,
-    HireDate DATE
-);
+ALTER TABLE employee
+ADD COLUMN department_id INTEGER;
+
+ALTER TABLE employee
+ADD COLUMN manager_id INTEGER DEFAULT NULL;
 ```
 
 **Output:**
 
-<img width="1231" height="408" alt="image" src="https://github.com/user-attachments/assets/f7652479-35cd-4612-b846-85f9a34db1b2" />
+![image](https://github.com/user-attachments/assets/ab3f86bd-0580-4a79-b5ab-4f9f28a483da)
 
 
 **Question 6**
----
-Create a table named Department with the following constraints:
-DepartmentID as INTEGER should be the primary key.
-DepartmentName as TEXT should be unique and not NULL.
-Location as TEXT.
+
+![image](https://github.com/user-attachments/assets/7bd765ab-79f8-4d55-8869-195293bc88f4)
 
 ```sql
-create table Department(
-DepartmentID  integer primary key,
-DepartmentName  text unique not null,
-Location  TEXT
-);
+INSERT INTO Products( ProductID, ProductName, Price, Stock)
+SELECT ProductID, ProductName, Price, Stock
+FROM Discontinued_products;
 ```
+
 
 **Output:**
 
-<img width="1237" height="380" alt="image" src="https://github.com/user-attachments/assets/29ca7fda-f23f-44f4-a761-0fff66f6816a" />
+![image](https://github.com/user-attachments/assets/c6a8d724-84fa-404b-a372-345634603889)
 
 
 **Question 7**
----
-Insert the below data into the Employee table, allowing the Department and Salary columns to take their default values.
 
-EmployeeID  Name         Position
-----------  -----------  ----------
-4           Emily White  Analyst
+![image](https://github.com/user-attachments/assets/0535afec-4e16-4ac3-b3b0-fae3d06529e3)
 
-Note: The Department and Salary columns will use their default values.    
-```sql
-insert into Employee (EmployeeID,Name,Position) 
-values (4,"Emily White","Analyst");
-```
-
-**Output:**
-
-<img width="1234" height="407" alt="image" src="https://github.com/user-attachments/assets/c85822fc-0e00-467c-82d5-967e81c46702" />
-
-
-**Question 8**
----
-Create a table named Bonuses with the following constraints:
-BonusID as INTEGER should be the primary key.
-EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
-BonusAmount as REAL should be greater than 0.
-BonusDate as DATE.
-Reason as TEXT should not be NULL.
 
 ```sql
-create table Bonuses(
-BonusID integer primary key,
-EmployeeID integer ,
-BonusAmount real check (BonusAmount > 0),
-BonusDate date,
-Reason text not null,
-foreign key (EmployeeID) references Employees(EmployeeID)
-
+CREATE TABLE products (
+    product_id INTEGER PRIMARY KEY,
+    product_name TEXT NOT NULL,
+    list_price DECIMAL(10, 2) NOT NULL,
+    discount DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    CHECK (list_price >= discount),
+    CHECK (discount >= 0),
+    CHECK (list_price >= 0)
 );
 ```
 
 **Output:**
 
-<img width="1222" height="362" alt="image" src="https://github.com/user-attachments/assets/14a866e1-3bbe-4c48-8682-f405699365c4" />
+![image](https://github.com/user-attachments/assets/01b7b738-3e54-4288-8373-d864b6fa6cb2)
+
+**Question 8**
+
+![image](https://github.com/user-attachments/assets/67b2ca3e-6486-472f-97f2-d5f24a91f944)
+
+
+```sql
+ALTER TABLE Companies
+ADD COLUMN designation varchar(50);
+
+ALTER TABLE Companies
+ADD COLUMN net_salary number;
+```
+
+**Output:**
+![image](https://github.com/user-attachments/assets/88d6a2ed-1baf-4599-8ae6-f11e435e12bd)
+
 
 
 **Question 9**
----
-Insert all students from Archived_students table into the Student_details table.
 
-cid         name        type        notnull     dflt_value  pk
-----------  ----------  ----------  ----------  ----------  ----------
-0           RollNo      INT           0                       1
-1           Name        VARCHAR(100)  0                       0
-2           Gender      VARCHAR(10)   0                       0
-3           Subject     VARCHAR(50)   0                       0
-4           MARKS       INT           0                       0
-```sql
-insert into Student_details (RollNo,Name,Gender,Subject,MARKS)
-select RollNo,Name,Gender,Subject,MARKS
-from Archived_students 
-```
+![image](https://github.com/user-attachments/assets/2182ae38-63f6-4014-815f-9b8ae9632a5a)
 
-**Output:**
-
-<img width="1226" height="378" alt="image" src="https://github.com/user-attachments/assets/f99bc044-a355-4892-9095-aef417daf912" />
-
-
-**Question 10**
----
-Create a table named Employees with the following constraints:
-
-EmployeeID should be the primary key.
-FirstName and LastName should be NOT NULL.
-Email should be unique.
-Salary should be greater than 0.
-DepartmentID should be a foreign key referencing the Departments table.
 
 ```sql
-create table Employees(
-    EmployeeID integer primary key,
-    FirstName text not null,
-    LastName text not null,
-    Email text unique ,
-    Salary integer check(Salary>0),
-    DepartmentID integer,
-    foreign key (EmployeeID) references Departments(DepartmentID)
+CREATE TABLE orders (
+    ord_id TEXT NOT NULL CHECK (LENGTH(ord_id) = 4),
+    item_id TEXT NOT NULL,
+    ord_date DATE,
+    ord_qty INTEGER,
+    cost INTEGER,
+    PRIMARY KEY (item_id, ord_date)
 );
 ```
 
 **Output:**
 
-<img width="1225" height="517" alt="image" src="https://github.com/user-attachments/assets/0d682a51-140a-4eab-b791-60b591e0a21f" />
+![image](https://github.com/user-attachments/assets/d1092dbf-8484-48a2-b805-9dd8982bc67c)
 
+
+**Question 10**
+
+![image](https://github.com/user-attachments/assets/4333c8c6-f8a5-495a-af25-bafd3a25e27b)
+
+
+```sql
+INSERT INTO Employee (EmployeeID, Name, Position)
+VALUES (4, 'Emily White', 'Analyst');
+```
+
+**Output:**
+
+![image](https://github.com/user-attachments/assets/01e7b248-9972-4263-b5e4-4754d0327def)
 
 
 ## RESULT
